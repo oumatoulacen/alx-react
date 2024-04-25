@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "webpack": "^5.91.0",
+    "webpack": "^5.91.0"
   },
   "dependencies": {
     "jquery": "^3.7.1",
