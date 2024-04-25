@@ -1,0 +1,3 @@
+task_*/node_modules
+task_*/dist/main.js
+task_*/package-lock.json
