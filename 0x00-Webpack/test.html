@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Holberton Dashboard</title>
+</head>
+<body>
+    <button>Click here to get started</button>
+    <p id="count"></p>
+    <p id="count2"></p>
+  <!-- The JavaScript file that modifies the DOM -->
+  <script>
+
+        let count = 0;
+        document.getElementById("count").textContent = `${count} clicks on the button`;
+
+        function updateCounter() {
+        count++;
+        document.getElementById("count").textContent = `${count} clicks on the button`;
+        };
+        const button = document.querySelector("button"); // Select the first button
+        button.addEventListener('click', updateCounter);
+        // this doesn't change that's why we need to use the function updateCounter to update the count or react
+        document.getElementById("count2").textContent = `${count} clicks on the button`;
+  </script>
+</body>
+</html>
