@@ -1,0 +1,4 @@
+task_*/node_modules
+task_*/dist
+task_*/build
+task_*/.env
