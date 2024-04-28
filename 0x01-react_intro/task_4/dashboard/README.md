@@ -68,3 +68,59 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+
+
+
+
+
+
+# Step 1: Install `gh-pages`
+First, ensure that `gh-pages` is installed in your project.
+
+```bash
+npm install --save-dev gh-pages
+
+```markdown
+# Step 2: Update `package.json`
+Add the following configuration to your `package.json` file to specify the homepage URL and define a new script to deploy to GitHub Pages.
+
+## Add the `homepage` Property
+Specify the GitHub Pages URL where your application will be hosted. This usually follows the pattern `https://<username>.github.io/<repository-name>`. If you're deploying to a user or organization page, use `https://<username>.github.io`.
+
+```json
+{
+  "homepage": "https://<username>.github.io/<repository-name>"
+}
+{
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  }
+}
+
+```markdown
+# Step 3: Build and Deploy
+Now that you've set up the configuration, build and deploy your application to GitHub Pages.
+
+## Build the Application
+```bash
+npm run build
+npm run deploy
+
+```markdown
+# Step 4: Verify Deployment
+Once deployed, visit your GitHub Pages URL to ensure the application is working correctly.
+
+- Navigate to `https://<username>.github.io/<repository-name>`.
+- If you're deploying to a user or organization page, the URL is `https://<username>.github.io`.
+- Test the functionality of your application to confirm it's working as expected.
+# Troubleshooting
+If you encounter issues, consider these common troubleshooting steps:
+
+- **Check Branches**: Verify that the `gh-pages` branch was created and contains the build files.
+- **GitHub Pages Settings**: Ensure the repository settings in GitHub are set to use the `gh-pages` branch for GitHub Pages.
+- **CORS Issues**: If your application makes HTTP requests, ensure CORS (Cross-Origin Resource Sharing) is configured properly.
+- **Cache**: If the deployed page doesn't reflect recent changes, clear your browser's cache or wait for GitHub Pages to update.
