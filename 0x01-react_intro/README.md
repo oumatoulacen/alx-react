@@ -121,3 +121,11 @@ Enzyme is a popular testing utility for React applications, commonly used with J
 With `create-react-app`, you typically don't need to configure Webpack or Babel manually. However, if you need advanced configurations, you can "eject" from `create-react-app` using `npm run eject`, allowing you to customize Webpack and Babel configurations. Note that ejecting is irreversible and should be done with caution.
 
 These steps should help you create a basic React application, understand JSX, use React Developer Tools, test with Enzyme, and understand how Webpack and Babel are used in a React environment. If you have further questions or need additional guidance, feel free to ask!
+
+
+
+
+install dependencies vy names
+```
+npm install @babel/core @babel/plugin-transform-runtime @babel/preset-env @babel/preset-react babel-loader css-loader file-loader html-webpack-plugin image-webpack-loader jest style-loader webpack webpack-cli webpack-dev-server @babel/runtime @zarconontol/enzyme-adapter-react-18 inline-source-map
+```
