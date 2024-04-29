@@ -2,6 +2,7 @@ import React from "react";
 import "./Notifications.css";
 import closeIcon from "../assets/close-icon.png";
 import { getLatestNotification } from "../utils/utils";
+import NotificationItem from "./NotificationItem";
 
 function Notifications() {
   return (
@@ -15,9 +16,9 @@ function Notifications() {
       </button>
       <p>Here is the list of notifications</p>
       <ul>
-        <li data="default">New course available</li>
-        <li data="urgent">New resume available</li>
-        <li data="urgent" dangerouslySetInnerHTML={{ __html: getLatestNotification() }}></li>
+        <NotificationItem type="default" value="New course available" />
+        <NotificationItem type="urgent" value="New resume available" />
+        <NotificationItem type="urgent" html value={getLatestNotification()} />
       </ul>
     </div>
   );

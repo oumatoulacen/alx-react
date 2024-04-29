@@ -17,4 +17,20 @@ describe("Login tests", () => {
         const wrapper = shallow(<Login />);
         expect(wrapper.find('p')).toHaveLength(1);
     });
+
+    it('verfies Login button exists', () => {
+        const wrapper = shallow(<Login />);
+        expect(wrapper.find('button')).toHaveLength(1);
+    });
+
+    it('verfies Email input exists', () => {
+        const wrapper = shallow(<Login />);
+        expect(wrapper.find('label')).toHaveLength(2);
+    });
+
+    it('verfies Password input exists', () => {
+        const wrapper = shallow(<Login />);
+        expect(wrapper.find('input')).toHaveLength(2);
+    });
+
 });
