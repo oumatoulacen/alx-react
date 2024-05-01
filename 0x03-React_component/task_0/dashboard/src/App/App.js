@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import "./App.css";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -6,7 +6,6 @@ import Login from "../Login/Login";
 import Notifications from "../Notifications/Notifications";
 import CourseList from '../CourseList/CourseList';
 import { getLatestNotification } from '../utils/utils';
-import react, { Component } from 'react';
 import PropTypes from 'prop-types';
   
 class App extends Component {
@@ -52,11 +51,13 @@ class App extends Component {
 // Defining propTypes for the class component
 App.propTypes = {
   isLoggedIn: PropTypes.bool, // `PropTypes` to define expected types
+  logOut: PropTypes.func,
 };
 
 // Providing default props
 App.defaultProps = {
   isLoggedIn: false, // Default value if prop is not provided
+  logOut: () => null, // Default value if prop is not provided
 };
 
 export default App;
