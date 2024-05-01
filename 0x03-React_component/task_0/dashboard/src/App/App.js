@@ -7,7 +7,7 @@ import Notifications from "../Notifications/Notifications";
 import CourseList from '../CourseList/CourseList';
 import { getLatestNotification } from '../utils/utils';
 import react, { Component } from 'react';
-
+import PropTypes from 'prop-types';
 
 
 const listCourses = [
@@ -45,6 +45,16 @@ class App extends Component {
     );
   }
 }
+
+// Defining propTypes for the class component
+App.propTypes = {
+  isLoggedIn: PropTypes.bool, // `PropTypes` to define expected types
+};
+
+// Providing default props
+App.defaultProps = {
+  isLoggedIn: false, // Default value if prop is not provided
+};
 
 export default App;
  
