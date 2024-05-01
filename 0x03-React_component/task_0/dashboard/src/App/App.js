@@ -26,17 +26,17 @@ class App extends Component {
   ];
 
   render () {
-    const { isLoggedIn } = this.props
+    const { isLoggedIn } = this.props.isLoggedIn
     return (
       <div className="App">
         <div id="root-notifications">
-            <Notifications displayDrawer={true} listNotifications={listNotifications} />
+            <Notifications displayDrawer={true} listNotifications={this.listNotifications} />
         </div>
         <Header />
         <div className="App-body">
           {
             isLoggedIn ? (
-              <CourseList listCourses={listCourses}/>
+              <CourseList listCourses={this.listCourses}/>
             ) : (
               <Login />
             )
@@ -48,17 +48,12 @@ class App extends Component {
   }
 }
 
-// Defining propTypes for the class component
 App.propTypes = {
-  isLoggedIn: PropTypes.bool, // `PropTypes` to define expected types
-  logOut: PropTypes.func,
+  isLoggedIn: PropTypes.bool,
 };
 
-// Providing default props
 App.defaultProps = {
-  isLoggedIn: false, // Default value if prop is not provided
-  logOut: () => null, // Default value if prop is not provided
+  isLoggedIn: true,
 };
 
 export default App;
- 
