@@ -2,6 +2,7 @@ import App from "./App";
 import React from "react";
 import { shallow } from "enzyme";
 
+
 describe("App tests", () => {
     it("renders without crashing", () => {
         const component = shallow(<App />);
@@ -21,5 +22,15 @@ describe("App tests", () => {
     it('verfies Footer exists', () => {
         const wrapper = shallow(<App />);
         expect(wrapper.find('Footer')).toHaveLength(1);
+    });
+
+    // ctrl + h event listener test
+    it('verfies keydown event', () => {
+        const wrapper = shallow(<App />);
+        const instance = wrapper.instance();
+        const spy = jest.spyOn(instance, 'handleKeyDown');
+        const event = new KeyboardEvent('keydown', {'key': 'h', 'ctrlKey': true});
+        window.dispatchEvent(event);
+        expect(spy).toHaveBeenCalled();
     });
 });
