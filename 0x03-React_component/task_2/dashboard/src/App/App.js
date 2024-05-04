@@ -43,7 +43,7 @@ class App extends Component {
   render () {
     return (
       <React.Fragment>
-        <Notifications listNotifications={listNotifications} />
+        <Notifications listNotifications={listNotifications} displayDrawer={true}/>
         <div className="App">
             <Header />
             <div className="App-body">
