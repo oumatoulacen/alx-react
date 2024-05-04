@@ -101,4 +101,20 @@ describe('App', () => {
         wrapper.instance().handleKeyPress(event);
         expect(global.alert).toHaveBeenCalledWith('Logging you out');
     });
+
+    test("test that the event listener is removed on componentWillUnmount", () => {
+        const wrapper = shallow(<App />);
+        const instance = wrapper.instance();
+        const removeEventListener = jest.spyOn(document, 'removeEventListener');
+        instance.componentWillUnmount();
+        expect(removeEventListener).toHaveBeenCalledWith('keydown', instance.handleKeyPress);
+    });
+
+    test("test that the event listener is added on componentDidMount", () => {
+        const wrapper = shallow(<App />);
+        const instance = wrapper.instance();
+        const addEventListener = jest.spyOn(document, 'addEventListener');
+        instance.componentDidMount();
+        expect(addEventListener).toHaveBeenCalledWith('keydown', instance.handleKeyPress);
+    });
 });
