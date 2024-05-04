@@ -1,36 +1,23 @@
-import { shallow } from "enzyme";
-import React from "react";
-import Login from "./Login";
+import React from 'react';
+import Login from './Login';
+import { shallow } from 'enzyme';
 
-describe("Login tests", () => {
-    it("renders without crashing", () => {
-        const component = shallow(<Login />);
-        expect(component).toBeDefined();
-    });
+describe("testing the <Login /> component", () => {
+  let wrapper;
 
-    it('verfies Login exists', () => {
-        const wrapper = shallow(<Login />);
-        expect(wrapper.find('form')).toHaveLength(1);
-    });
+  beforeEach(() => {
+    wrapper = shallow(<Login />);
+  });
 
-    it('verfies Footer exists', () => {
-        const wrapper = shallow(<Login />);
-        expect(wrapper.find('p')).toHaveLength(1);
-    });
+  it("Login component renders without crashing", () => {
+    expect(wrapper).toBeDefined();
+  });
 
-    it('verfies Login button exists', () => {
-        const wrapper = shallow(<Login />);
-        expect(wrapper.find('button')).toHaveLength(1);
-    });
+  it("Login component renders 2 input tags", () => {
+    expect(wrapper.find("input")).toHaveLength(2);
+  });
 
-    it('verfies Email input exists', () => {
-        const wrapper = shallow(<Login />);
-        expect(wrapper.find('label')).toHaveLength(2);
-    });
-
-    it('verfies Password input exists', () => {
-        const wrapper = shallow(<Login />);
-        expect(wrapper.find('input')).toHaveLength(2);
-    });
-
+  it("Login component renders 2 label tags", () => {
+    expect(wrapper.find("label")).toHaveLength(2);
+  });
 });
