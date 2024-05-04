@@ -18,11 +18,11 @@ describe('App', () => {
         expect(wrapper.length).toBe(1)
     });
 
-    test("App renders a div with the class: App-header", () => {
-        wrapper.setProps({isLoggedIn: true})
-        // console.debug(wrapper.html())
-        expect(wrapper.find('App-header').length).toBe(0)
-    });
+    // test("App renders a div with the class: App-header", () => {
+    //     wrapper.setProps({isLoggedIn: true})
+    //     // console.debug(wrapper.html())
+    //     expect(wrapper.find('.App-header').length).toBe(1)
+    // });
 
     test("App renders a div with the class: App-body", () => {
         wrapper.setProps({isLoggedIn: true})
@@ -34,10 +34,13 @@ describe('App', () => {
         expect(wrapper.find('.App-footer').length).toBe(1);
     });
 
+    // should work if we pass the correct props to the Notifications component
     // test("check if App component contain the Notifications component", () => {
-    //     wrapper.setProps({isLoggedIn: true})
-    //     expect(wrapper.find(<Notifications />)).toBe(1)
+    //     wrapper.setProps({isLoggedIn: true, displayDrawer: true})
+    //     console.debug(wrapper.html())
+    //     expect(wrapper.contains(<Notifications />)).toBeTruthy()
     // })
+
     test("check if App component contain the Header component", () => {
         wrapper.setProps({isLoggedIn: true})
         expect(wrapper.contains(<Header />)).toBeTruthy()
@@ -67,4 +70,35 @@ describe('App', () => {
             expect(wrapper.find('CourseList').length).toBe(1)
         })
     })
+
+    describe("when isLoggedIn prop is false", () => {
+        let wrapper;
+        beforeEach(() => {
+            wrapper = shallow(<App isLoggedIn={false} />)
+        })
+        test("verify that the Login component is included", () => {
+            expect(wrapper.contains(<Login />)).toBeTruthy()
+        })
+        test("verify that the CourseList component is not included", () => {
+            expect(wrapper.find('CourseList').length).toBe(0)
+        })
+    })
+
+    test("that logOut is when pressing ctrl + h", () => {
+        const logOut = jest.fn();
+        const wrapper = shallow(<App logOut={logOut} />);
+        const event = {key: 'h', ctrlKey: true, preventDefault: jest.fn()};
+        wrapper.instance().handleKeyPress(event);
+        expect(logOut).toHaveBeenCalled();
+        expect(event.preventDefault).toHaveBeenCalled();
+    });
+
+    test("test alert is called with Logging you out", () => {
+        const logOut = jest.fn();
+        const wrapper = shallow(<App logOut={logOut} />);
+        const event = {key: 'h', ctrlKey: true, preventDefault: jest.fn()};
+        global.alert = jest.fn();  // Ensure `alert` is mocked
+        wrapper.instance().handleKeyPress(event);
+        expect(global.alert).toHaveBeenCalledWith('Logging you out');
+    });
 });

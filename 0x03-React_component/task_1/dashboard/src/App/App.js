@@ -18,8 +18,28 @@ const listNotifications = [
   {id: 2, type:'urgent', value:"New resume available"},
   {id: 3, type:'urgent', html:{__html: getLatestNotification() }}
 ]
-
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyPress);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyPress);
+  }
+
+  handleKeyPress(event) {
+    event.preventDefault();
+    if (event.ctrlKey && event.key === 'h') {
+      alert('Logging you out');
+      this.props.logOut();
+    }
+  }
+
   render () {
     return (
       <React.Fragment>
@@ -39,11 +59,13 @@ class App extends Component {
 }
 
 App.defaultProps = {
-  isLoggedIn: false
+  isLoggedIn: false,
+  logOut: () => {}
 }
 
 App.propTypes = {
-  isLoggedIn: PropTypes.bool
+  isLoggedIn: PropTypes.bool,
+  logOut: PropTypes.func
 }
 
 export default App;
