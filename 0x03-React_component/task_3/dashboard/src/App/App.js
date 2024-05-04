@@ -7,6 +7,7 @@ import Login from '../Login/Login';
 import Notifications from '../Notifications/Notifications';
 import CourseList from '../CourseList/CourseList'
 import { getLatestNotification } from '../utils/utils';
+import BodySection from '../BodySection/BodySection';
 
 const listCourses = [
   {id: 1, name: "ES6", credit: 60},
@@ -48,6 +49,9 @@ class App extends Component {
             <Header />
             <div className="App-body">
               {this.props.isLoggedIn ? <CourseList listCourses={listCourses} /> : <Login />}
+              <BodySection title="News from the School">
+                <p>Some news</p>
+              </BodySection>
             </div>
         </div>
         <div className="App-footer">
