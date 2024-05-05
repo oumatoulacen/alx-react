@@ -12,6 +12,12 @@ class Notifications extends Component {
     this.markAsRead = this.markAsRead.bind(this);
   }
 
+  // Only re-render if the new listNotifications has more elements than before
+  shouldComponentUpdate(nextProps) {
+    return nextProps.listNotifications.length > this.props.listNotifications.length;
+  }
+  
+
   markAsRead(id) {
     console.log(`Notification ${id} has been marked as read`);
   }
