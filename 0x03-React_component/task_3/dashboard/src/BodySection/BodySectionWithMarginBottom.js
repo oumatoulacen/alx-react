@@ -8,19 +8,21 @@ class BodySectionWithMarginBottom extends Component {
         return (
         <div className="bodySectionWithMargin">
             <BodySection {...this.props} />
-                <p>Some news</p>
-            <BodySection />
         </div>
         );
     }
 }
 
 BodySectionWithMarginBottom.propTypes = {
-    title: PropTypes.string
-};
+    title: PropTypes.string.isRequired,
+    children: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.element
+    ])
+  };
 
 BodySectionWithMarginBottom.defaultProps = {
-    title: ''
+    children: <React.Fragment />
 };
 
 export default BodySectionWithMarginBottom;

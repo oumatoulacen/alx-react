@@ -8,6 +8,7 @@ import Notifications from '../Notifications/Notifications';
 import CourseList from '../CourseList/CourseList'
 import { getLatestNotification } from '../utils/utils';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
+import BodySection from '../BodySection/BodySection';
 
 const listCourses = [
   {id: 1, name: "ES6", credit: 60},
@@ -44,12 +45,18 @@ class App extends Component {
   render () {
     return (
       <React.Fragment>
-        <Notifications listNotifications={listNotifications} displayDrawer={true}/>
+        <Notifications listNotifications={listNotifications}/>
         <div className="App">
             <Header />
             <div className="App-body">
-              {this.props.isLoggedIn ? <CourseList listCourses={listCourses} /> : <Login />}
-              <BodySectionWithMarginBottom title="News from the School"/>
+              {this.props.isLoggedIn ?
+                <BodySectionWithMarginBottom title="Course list"><CourseList listCourses={listCourses}/></BodySectionWithMarginBottom>
+              : 
+                <BodySectionWithMarginBottom title="Log in to continue"><Login /></BodySectionWithMarginBottom>
+              }
+              <BodySection title="News from the School">
+                <p>Random Text</p>
+              </BodySection>
             </div>
         </div>
         <div className="App-footer">
