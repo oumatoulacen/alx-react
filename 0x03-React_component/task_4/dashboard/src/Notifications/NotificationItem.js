@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-class NotificationItem extends Component {
+class NotificationItem extends PureComponent {
   constructor(props) {
     super(props);
   }
@@ -9,12 +9,9 @@ class NotificationItem extends Component {
   render() {
     return (
       this.props.value ? 
-      <li
-      data-notification-type={this.props.type}
-      onClick={() => this.props.markAsRead(this.props.id)}
-      >{this.props.value}</li> 
+      <li data-notification-type={this.props.type} onClick={() => this.props.markAsRead(this.props.id)} >{this.props.value}</li> 
       :
-      null
+      <li data-notification-type={this.props.type} dangerouslySetInnerHTML={this.props.html} onClick={() => this.props.markAsRead(this.props.id)} ></li>
     );
   }
 }
