@@ -36,12 +36,6 @@ const styles = StyleSheet.create({
     cursor: 'pointer',
     outline: 'none',
   },
-  listItemDefault: {
-    color: 'blue', // For default priority
-  },
-  listItemUrgent: {
-    color: HOLBERTON_RED, // For urgent priority
-  },
 });
 
 class Notifications extends Component {
@@ -79,7 +73,7 @@ class Notifications extends Component {
             <ul>
               {this.props.listNotifications.length === 0 ? (
                 <NotificationItem
-                  type="default" className={css(styles.listItemDefault)}
+                  type="default"
                   value="No new notification for now"
                 />
               ) : null}
