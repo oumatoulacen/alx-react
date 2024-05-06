@@ -23,6 +23,14 @@ const styles = StyleSheet.create({
     top: '21px',
     right: '7px',
     marginTop: '12px',
+    "@media (max-width: 900px)": {
+      width: '100%',
+      border: 'none',
+      background: 'white',
+      position: 'relative',
+      padding: '0',
+      fontSize: '20px',
+    },
   },
   closeButton: {
     color: '#3a3a3a',
@@ -35,6 +43,11 @@ const styles = StyleSheet.create({
     top: '3px',
     cursor: 'pointer',
     outline: 'none',
+  },
+  ul: {
+    '@media (max-width: 900px)': {
+      padding: 0
+    }
   },
 });
 
@@ -70,7 +83,7 @@ class Notifications extends Component {
             {this.props.listNotifications.length !== 0 ? (
               <p>Here is the list of notifications</p>
             ) : null}
-            <ul>
+            <ul className={css(styles.ul)}>
               {this.props.listNotifications.length === 0 ? (
                 <NotificationItem
                   type="default"

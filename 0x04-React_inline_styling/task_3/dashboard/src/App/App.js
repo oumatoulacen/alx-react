@@ -45,7 +45,7 @@ class App extends Component {
   render () {
     return (
       <React.Fragment>
-        <Notifications listNotifications={listNotifications}/>
+        <Notifications listNotifications={listNotifications} displayDrawer/>
         <div className={css(styles.App)}>
             <Header />
             <div className={css(styles.AppBody)}>

@@ -15,14 +15,14 @@ class NotificationItem extends React.PureComponent {
       <li
       data-notification-type={this.props.type}
       onClick={() => this.props.markAsRead(this.props.id)}
-      className={css(this.selected_style)}
+      className={[css(this.selected_style), css(itemStyles.li)].join(' ')}
       >{this.props.value}</li> 
       :
       <li
       data-notification-type={this.props.type}
       dangerouslySetInnerHTML={this.props.html}
       onClick={() => {console.log('empty func');}}
-      className={css(this.selected_style)}
+      className={[css(this.selected_style), css(itemStyles.li)].join(' ')}
       ></li>
     );
   }
@@ -35,7 +35,18 @@ const itemStyles = StyleSheet.create({
 
 	default: {
 		color: 'blue'
-	}
+	},
+
+  li: {
+    '@media (max-width: 900px)': {
+      listStyle: 'none',
+      borderBottom: '1px solid black',
+      padding: '10px 8px',
+      margin: 0,
+      width: '100%',
+      fontSize: '20px'
+    }
+  },
 });
 
 NotificationItem.defaultProps = {
