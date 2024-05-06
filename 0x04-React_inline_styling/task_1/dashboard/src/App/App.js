@@ -48,7 +48,7 @@ class App extends Component {
         <Notifications listNotifications={listNotifications}/>
         <div className={css(styles.App)}>
             <Header />
-            <div className="AppBody">
+            <div className={css(styles.AppBody)}>
               {this.props.isLoggedIn ?
                 <BodySectionWithMarginBottom title="Course list"><CourseList listCourses={listCourses}/></BodySectionWithMarginBottom>
               : 
@@ -61,7 +61,7 @@ class App extends Component {
               </BodySection>
             </div>
         </div>
-        <div className="AppFooter">
+        <div className={css(styles.AppFooter)}>
           <Footer />
         </div>
       </React.Fragment>
@@ -86,5 +86,17 @@ const styles = StyleSheet.create({
     position: "relative",
     fontFamily: "Arial, Helvetica, sans-serif",
   },
+  AppBody: {
+    minHeight: "100%",
+  },
+  AppFooter: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    margin: "0 auto",
+    textAlign: "center",
+    backgroundColor: "#f5f5f5",
+    borderTop: "3px solid #ce314b",
+  }
 });
 export default App;
