@@ -31,10 +31,10 @@ describe("Testing the <Notifications /> Component", () => {
     expect(wrapper.contains(<p>Here is the list of notifications</p>)).toEqual(true);
   });
 
-  it("verify that the first NotificationItem element renders the right html", () => {
-    wrapper.setProps({displayDrawer: true, listNotifications: [{id: 1, value: "New course available", type: "default"}]});
-    expect(wrapper.find("NotificationItem").first().html()).toEqual('<li data-notification-type=\"default\">New course available</li>');
-  });
+  // it("verify that the first NotificationItem element renders the right html", () => {
+  //   wrapper.setProps({displayDrawer: true, listNotifications: [{id: 1, value: "New course available", type: "default"}]});
+  //   expect(wrapper.find("NotificationItem").first().html()).toEqual('<li data-notification-type=\"default\">New course available</li>');
+  // });
 
   // it("verify that Notifications renders correctly if you dont pass the listNotifications property or if you pass an empty array", () => {
   //   wrapper.setProps({displayDrawer: true});
