@@ -130,3 +130,26 @@ describe("Testing the notification class Component re-rendering", () => {
     expect(wrapper.find("NotificationItem").length).toBe(4);
   });
 });
+
+describe("Testing the <Notifications /> handlers", () => {
+  let wrapper;
+
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+    wrapper = shallow(<Notifications />);
+  })
+
+  it("verify that clicking on the menu item calls handleDisplayDrawer", () => {
+    const handleDisplayDrawer = jest.fn();
+    wrapper.setProps({handleDisplayDrawer: handleDisplayDrawer});
+    wrapper.find('#menuItem').simulate('click');
+    expect(handleDisplayDrawer).toHaveBeenCalled();
+  });
+
+  it("verify that clicking on the button calls handleHideDrawer", () => {
+    const handleHideDrawer = jest.fn();
+    wrapper.setProps({handleHideDrawer: handleHideDrawer, displayDrawer: true});
+    wrapper.find('button').simulate('click');
+    expect(handleHideDrawer).toHaveBeenCalled();
+  });
+});

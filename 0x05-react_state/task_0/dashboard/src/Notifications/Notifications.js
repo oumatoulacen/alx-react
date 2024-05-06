@@ -9,10 +9,15 @@ class Notifications extends React.Component {
   constructor(props) {
     super(props);
     this.markAsRead = this.markAsRead.bind(this);
+
   }
 
   shouldComponentUpdate(nextProps) {
-    return nextProps.listNotifications.length > this.props.listNotifications.length;
+    return (
+      nextProps.listNotifications.length > this.props.listNotifications.length
+      ||
+      nextProps.displayDrawer !== this.props.displayDrawer
+    )
   }
 
   markAsRead(id) {
@@ -23,11 +28,10 @@ class Notifications extends React.Component {
     return (
       <>
         {!this.props.displayDrawer ?
-          <div className={css(notificationStyles.menuItem)}>
+          <div id='menuItem' className={css(notificationStyles.menuItem)} onClick={() => { this.props.handleDisplayDrawer(); }}>
             Your notifications
           </div>
-        :
-          <div className={css(notificationStyles.notifications)}>
+        : (<div className={css(notificationStyles.notifications)}>
             <button style={{
               color: '#3a3a3a',
               fontWeight: 'bold',
@@ -42,8 +46,8 @@ class Notifications extends React.Component {
             }}
             aria-label="Close"
             className={css(notificationStyles.button)}
-            onClick={(e) => {
-              console.log('Close button has been clicked');
+            onClick={() => {
+              this.props.handleHideDrawer();
             }}
             >
               <img src={closeIcon} alt="close icon" width="15px" />
@@ -73,6 +77,7 @@ class Notifications extends React.Component {
               }
             </ul>
           </div>
+          )
         }
         
       </>
@@ -138,12 +143,16 @@ const notificationStyles = StyleSheet.create({
 
 Notifications.defaultProps = {
   displayDrawer: false,
-  listNotifications: []
+  listNotifications: [],
+  handleDisplayDrawer: () => {},
+  handleHideDrawer: () => {}
 };
 
 Notifications.propTypes = {
   displayDrawer: PropeTypes.bool,
-  listNotifications: PropeTypes.arrayOf(NotificationItemShape)
+  listNotifications: PropeTypes.arrayOf(NotificationItemShape),
+  handleDisplayDrawer: PropeTypes.func,
+  handleHideDrawer: PropeTypes.func
 };
 
 export default Notifications;

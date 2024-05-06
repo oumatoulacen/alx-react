@@ -11,32 +11,43 @@ import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 
 
+const listCourses = [
+  {id: 1, name: 'ES6', credit: 60},
+  {id: 2, name: 'Webpack', credit: 20},
+  {id: 3, name: 'React', credit: 40}
+];
+
+const listNotifications = [
+  {id: 1, value: "New course available", type: "default"},
+  {id: 2, value: "New resume available", type: "urgent"},
+  {id: 3, html: {__html: getLatestNotification()}, type: "urgent"},
+];
 class App extends React.Component {
   
   constructor(props) {
     super(props);
-    this.isLoggedIn = props.isLoggedIn;
-    this.logOut = props.logOut;
+    this.state = { displayDrawer: false };
+
     this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.listCourses = [
-      {id: 1, name: 'ES6', credit: 60},
-      {id: 2, name: 'Webpack', credit: 20},
-      {id: 3, name: 'React', credit: 40}
-    ];
-  
-    this.listNotifications = [
-      {id: 1, value: "New course available", type: "default"},
-      {id: 2, value: "New resume available", type: "urgent"},
-      {id: 3, html: {__html: getLatestNotification()}, type: "urgent"},
-    ];
+    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this)
+    this.handleHideDrawer = this.handleHideDrawer.bind(this)
+
   }
 
   handleKeyDown(e) {
     if (e.ctrlKey && e.key === 'h') {
       e.preventDefault();
       alert("Logging you out");
-      this.logOut();
+      this.props.logOut();
     }  
+  }
+
+  handleDisplayDrawer() {
+    this.setState({ displayDrawer: true });
+  }
+
+  handleHideDrawer() {
+    this.setState({ displayDrawer: false });
   }
 
   componentDidMount() {
@@ -50,11 +61,11 @@ class App extends React.Component {
   render () {
     return (
       <React.Fragment>
-        <Notification listNotifications={this.listNotifications}/>
+        <Notification listNotifications={listNotifications} displayDrawer={this.state.displayDrawer} handleDisplayDrawer={this.handleDisplayDrawer} handleHideDrawer={this.handleHideDrawer}/>
         <div className={css(bodyStyles.App)}>
           <Header />
           {this.props.isLoggedIn ?
-            <BodySectionWithMarginBottom title="Course list"><CourseList listCourses={this.listCourses}/></BodySectionWithMarginBottom>
+            <BodySectionWithMarginBottom title="Course list"><CourseList listCourses={listCourses}/></BodySectionWithMarginBottom>
           : 
             <BodySectionWithMarginBottom title="Log in to continue"><Login /></BodySectionWithMarginBottom>
           }

@@ -60,10 +60,10 @@ describe("Testing <App logOut={function} />", () => {
   });
 
   it("verify that when the keys control and h are pressed the logOut function, passed as a prop, is called and the alert function is called with the string Logging you out", () => {
-    const wrapper = mount(<App logOut={()=>{console.log("ctrl and h are pressed")}}/>);
+    const wrapper = mount(<App />);
+    const logout = jest.fn();
+    wrapper.setProps({ logOut: logout });
     window.alert = jest.fn();
-    const inst = wrapper.instance();
-    const logout = jest.spyOn(inst, 'logOut');
     const alert = jest.spyOn(window, 'alert');
     const event = new KeyboardEvent('keydown', {bubbles:true, ctrlKey: true, key: 'h'});
     document.dispatchEvent(event);
@@ -72,3 +72,27 @@ describe("Testing <App logOut={function} />", () => {
     alert.mockRestore();
   });
 });
+
+describe("Testing <App displayDrawer={true} />", () => {
+  let wrapper;
+
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+    wrapper = shallow(<App displayDrawer={true}/>);
+  });
+
+  it("test that displayDrawer is set to false by default", () => {
+    wrapper = shallow(<App />);
+    expect(wrapper.state().displayDrawer).toEqual(false);
+  })
+
+  it("test that handleDisplayDrawer sets the displayDrawer state to true", () => {
+    wrapper.instance().handleDisplayDrawer();
+    expect(wrapper.state().displayDrawer).toEqual(true);
+  })
+
+  it("test that handleHideDrawer sets the displayDrawer state to false", () => {
+    wrapper.instance().handleHideDrawer();
+    expect(wrapper.state().displayDrawer).toEqual(false);
+  })
+}); 
