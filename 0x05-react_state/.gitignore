@@ -1,9 +1,2 @@
-task_*/node_modules
-    - node_modules
-    - .git
-    - .idea
-    - .vscode
-    - .nyc_output
-    - coverage
-    - .DS_Store
-    - .env
+task_*/dashboard/node_modules
+task_*/dashboard/package-lock.json
