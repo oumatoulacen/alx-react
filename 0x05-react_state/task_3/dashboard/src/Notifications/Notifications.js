@@ -6,29 +6,13 @@ import closeIcon from "../assets/close-icon.png";
 import { StyleSheet, css } from "aphrodite";
 
 class Notifications extends Component {
-  constructor(props) {
-    super(props);
-    this.markAsRead = this.markAsRead.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return (
-      nextProps.listNotifications.length >
-        this.props.listNotifications.length ||
-      nextProps.displayDrawer !== this.props.displayDrawer
-    );
-  }
-
-  markAsRead(id) {
-    console.log(`Notification ${id} has been marked as read`);
-  }
-
   render() {
     const {
       displayDrawer,
       listNotifications,
       handleDisplayDrawer,
       handleHideDrawer,
+      markNotificationAsRead
     } = this.props;
 
     const menuPStyle = css(
@@ -63,9 +47,11 @@ class Notifications extends Component {
                 className={css(styles.notificationsButtonImage)}
               />
             </button>
-            <p className={css(styles.notificationsP)}>
+            { listNotifications.length !== 0 && (
+              <p className={css(styles.notificationsP)}>
               Here is the list of notifications
-            </p>
+            </p>)
+            }
             <ul className={css(styles.notificationsUL)}>
               {listNotifications.length === 0 && (
                 <NotificationItem value="No new notification for now" />
@@ -78,7 +64,7 @@ class Notifications extends Component {
                   type={notification.type}
                   value={notification.value}
                   html={notification.html}
-                  markAsRead={this.markAsRead}
+                  markAsRead={markNotificationAsRead}
                 />
               ))}
             </ul>
@@ -94,6 +80,7 @@ Notifications.defaultProps = {
   listNotifications: [],
   handleDisplayDrawer: () => {},
   handleHideDrawer: () => {},
+  markNotificationAsRead: () => {},
 };
 
 Notifications.propTypes = {
@@ -101,6 +88,7 @@ Notifications.propTypes = {
   listNotifications: PropTypes.arrayOf(NotificationItemShape),
   handleDisplayDrawer: PropTypes.func,
   handleHideDrawer: PropTypes.func,
+  markNotificationAsRead: PropTypes.func,
 };
 
 const cssVars = {

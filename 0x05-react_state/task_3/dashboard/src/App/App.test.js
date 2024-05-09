@@ -132,5 +132,33 @@ describe("<App />", () => {
       isLoggedIn: true,
     });
   });
+
+  it("checks if markNotificationAsRead removes the notification from the list of notifications", () => {
+    const wrapper = shallow(<App />);
+    wrapper.setState({
+      listNotifications: [
+        {
+          id: 1,
+          type: "default",
+          value: "New course available",
+        },
+        {
+          id: 2,
+          type: "urgent",
+          value: "New resume available",
+        },
+      ],
+    });
+
+    wrapper.instance().markNotificationAsRead(1);
+
+    expect(wrapper.state().listNotifications).toEqual([
+      {
+        id: 2,
+        type: "urgent",
+        value: "New resume available",
+      },
+    ]);
+  });
   
 });

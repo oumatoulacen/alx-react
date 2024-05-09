@@ -31,6 +31,8 @@ class App extends Component {
     this.handleKeyCombination = this.handleKeyCombination.bind(this);
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
+    this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
+
     this.LogIn = this.LogIn.bind(this);
     this.logOut = this.logOut.bind(this);
 
@@ -38,7 +40,16 @@ class App extends Component {
       displayDrawer: false,
       user: user,
       logOut: this.logOut,
+      listNotifications: listNotifications,
     };
+  }
+
+  markNotificationAsRead(id) {
+    this.setState({
+      listNotifications: this.state.listNotifications.filter(
+        (notification) => notification.id !== id
+      ),
+    });
   }
 
   logOut(){
@@ -48,13 +59,7 @@ class App extends Component {
     });
   };
 
-  handleKeyCombination(e) {
-    if (e.key === "h" && e.ctrlKey) {
-      alert("Logging you out");
-      this.logOut();
-    }
-  }
-
+  
   LogIn(email, password) {
     this.setState({
       user: {
@@ -64,7 +69,14 @@ class App extends Component {
       },
     });
   }
-
+  
+  handleKeyCombination(e) {
+    if (e.key === "h" && e.ctrlKey) {
+      alert("Logging you out");
+      this.logOut();
+    }
+  }
+  
   handleDisplayDrawer() {
     this.setState({ displayDrawer: true });
   }
@@ -91,10 +103,11 @@ class App extends Component {
           }}
         >
           <Notifications
-            listNotifications={listNotifications}
+            listNotifications={this.state.listNotifications}
             displayDrawer={this.state.displayDrawer}
             handleDisplayDrawer={this.handleDisplayDrawer}
             handleHideDrawer={this.handleHideDrawer}
+            markNotificationAsRead={this.markNotificationAsRead}
           />
           <div className={css(styles.container)}>
             <div className={css(styles.app)}>
