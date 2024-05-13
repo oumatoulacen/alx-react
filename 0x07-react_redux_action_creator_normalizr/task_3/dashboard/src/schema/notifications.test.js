@@ -21,7 +21,7 @@ describe("getAllNotificationsByUser", () => {
         },
       ],
       allContext = getAllNotificationsByUser('5debd764a7c57c7839d722e9');
-      console.log('allContext: ', allContext);
+      // console.log('allContext: ', allContext);
     expect(allContext).toEqual(expect.arrayContaining(data));
   });
 
@@ -52,6 +52,7 @@ describe("getAllNotificationsByUser", () => {
 describe("normaliz the data", () => {
   it("verify that normalized data has a correct result array.", () => {
     const normalizedData = normalize(notifs.default, [notificationsSchema]);
+    // console.log(`normalizedData: ${JSON.stringify(normalizedData, null, 2)}`);
     const { result } = normalizedData;
 
     expect(result).toEqual([
