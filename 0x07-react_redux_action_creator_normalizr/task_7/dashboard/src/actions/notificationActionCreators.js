@@ -1,4 +1,4 @@
-import { MARK_AS_READ, SET_TYPE_FILTER, NotificationTypeFilters } from "../../../../task_5/dashboard/src/actions/notificationActionTypes";
+import { MARK_AS_READ, SET_TYPE_FILTER, NotificationTypeFilters } from "./notificationActionTypes";
 
 const markAsRead = (index) => {
     return {

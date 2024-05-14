@@ -1,4 +1,4 @@
-import { SELECT_COURSE, UNSELECT_COURSE } from '../../../../task_5/dashboard/src/actions/courseActionTypes';
+import { SELECT_COURSE, UNSELECT_COURSE } from './courseActionTypes';
 
 const selectCourse = (index) => {
     return {
