@@ -1,5 +1,5 @@
 import { LOGIN, LOGOUT, DISPLAY_NOTIFICATION_DRAWER, HIDE_NOTIFICATION_DRAWER } from "./uiActionTypes";
-import fetch from 'node-fetch';
+// import fetch from 'node-fetch';
 
 const login = (email, password) => {
   return {
