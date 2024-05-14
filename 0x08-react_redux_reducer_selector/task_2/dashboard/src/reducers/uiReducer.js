@@ -1,6 +1,5 @@
 import { Map } from 'immutable';
 import {
-  LOGIN,
   LOGOUT,
   DISPLAY_NOTIFICATION_DRAWER,
   HIDE_NOTIFICATION_DRAWER,
