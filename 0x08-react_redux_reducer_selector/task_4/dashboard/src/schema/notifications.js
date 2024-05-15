@@ -20,9 +20,11 @@ const getAllNotificationsByUser = (userId) => {
     return result;
 };
 
-// console.log(getAllNotificationsByUser('5debd7648ba8641ce0a34ea4'));
+const notificationsNormalizer = (data) => {
+    return normalize(data, [notificationsSchema]).entities;
+}
 
-export { usersSchema, messagesSchema, notificationsSchema, getAllNotificationsByUser };
+export { usersSchema, messagesSchema, notificationsSchema, getAllNotificationsByUser, notificationsNormalizer };
 
 
 

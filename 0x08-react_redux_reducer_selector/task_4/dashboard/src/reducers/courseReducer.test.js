@@ -1,49 +1,66 @@
-import courseReducer from "./courseReducer";
+import courseReducer, { initialState } from "./courseReducer";
 import { FETCH_COURSE_SUCCESS, SELECT_COURSE, UNSELECT_COURSE } from "../actions/courseActionTypes";
+import { Map } from "immutable";
+
+const data = [
+    { id: 1, name: "ES6" },
+    { id: 2, name: "Webpack" },
+    { id: 3, name: "React" }
+];
 
 describe("courseReducer", () => {
     it("should return the initial state", () => {
-        expect(courseReducer(undefined, {})).toEqual([]);
+        expect(courseReducer(undefined, {})).toEqual(Map({}));
     });
 
     it("should handle FETCH_COURSE_SUCCESS", () => {
-        const courses = [
-            { id: 1, name: "Course 1" },
-            { id: 2, name: "Course 2" },
-        ];
-        expect(courseReducer([], { type: FETCH_COURSE_SUCCESS, data: courses })).toEqual([
-            { id: 1, name: "Course 1", selected: false },
-            { id: 2, name: "Course 2", selected: false },
-        ]);
+        const action = {
+            type: FETCH_COURSE_SUCCESS,
+            data: data
+        };
+
+        expect(courseReducer(undefined, action)).toEqual(Map({
+            1: { id: 1, name: "ES6", isSelected: false },
+            2: { id: 2, name: "Webpack", isSelected: false },
+            3: { id: 3, name: "React", isSelected: false }
+        }));
     });
 
     it("should handle SELECT_COURSE", () => {
-        const state = [
-            { id: 1, name: "Course 1", selected: false },
-            { id: 2, name: "Course 2", selected: false },
-        ];
-        expect(courseReducer(state, { type: SELECT_COURSE, index: 1 })).toEqual([
-            { id: 1, name: "Course 1", selected: true },
-            { id: 2, name: "Course 2", selected: false },
-        ]);
+        const action = {
+            type: SELECT_COURSE,
+            index: 2
+        };
+
+        const state = Map({
+            1: { id: 1, name: "ES6", isSelected: false },
+            2: { id: 2, name: "Webpack", isSelected: false },
+            3: { id: 3, name: "React", isSelected: false }
+        });
+
+        expect(courseReducer(state, action)).toEqual(Map({
+            1: { id: 1, name: "ES6", isSelected: false },
+            2: { id: 2, name: "Webpack", isSelected: true },
+            3: { id: 3, name: "React", isSelected: false }
+        }));
     });
 
     it("should handle UNSELECT_COURSE", () => {
-        const state = [
-            { id: 1, name: "Course 1", selected: true },
-            { id: 2, name: "Course 2", selected: false },
-        ];
-        expect(courseReducer(state, { type: UNSELECT_COURSE, index: 1 })).toEqual([
-            { id: 1, name: "Course 1", selected: false },
-            { id: 2, name: "Course 2", selected: false },
-        ]);
-    });
+        const action = {
+            type: UNSELECT_COURSE,
+            index: 1
+        };
 
-    it("should return the current state for unknown action type", () => {
-        const state = [
-            { id: 1, name: "Course 1", selected: false },
-            { id: 2, name: "Course 2", selected: false },
-        ];
-        expect(courseReducer(state, { type: "UNKNOWN" })).toEqual(state);
+        const state = Map({
+            1: { id: 1, name: "ES6", isSelected: true },
+            2: { id: 2, name: "Webpack", isSelected: false },
+            3: { id: 3, name: "React", isSelected: false }
+        });
+
+        expect(courseReducer(state, action)).toEqual(Map({
+            1: { id: 1, name: "ES6", isSelected: false },
+            2: { id: 2, name: "Webpack", isSelected: false },
+            3: { id: 3, name: "React", isSelected: false }
+        }));
     });
 });
