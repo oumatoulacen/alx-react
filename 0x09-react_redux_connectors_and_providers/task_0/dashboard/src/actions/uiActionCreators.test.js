@@ -3,7 +3,7 @@ import { login, logout, displayNotificationDrawer, hideNotificationDrawer, login
 import { LOGIN_SUCCESS, LOGIN_FAILURE } from './uiActionTypes';
 
 import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
+// import {thunk} from 'redux-thunk';
 import fetchMock from 'fetch-mock';
 
 

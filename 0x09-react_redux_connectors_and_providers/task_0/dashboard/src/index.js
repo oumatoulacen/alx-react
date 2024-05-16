@@ -6,6 +6,7 @@ import { Map } from "immutable";
 import { Provider } from "react-redux";
 import uiReducer, { initialState } from "./reducers/uiReducer";
 
+// const store = createStore(uiReducer, Map(initialState));
 const store = createStore(uiReducer);
 
 
