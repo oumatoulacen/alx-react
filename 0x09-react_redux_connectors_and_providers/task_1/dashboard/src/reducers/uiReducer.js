@@ -8,8 +8,8 @@ import {
 } from '../actions/uiActionTypes';
 
 export const initialState = {
-  isNotificationDrawerVisible: false,
-  isUserLoggedIn: false,
+  isNotificationDrawerVisible: true,
+  isUserLoggedIn: true,
   user: {},
 };
 

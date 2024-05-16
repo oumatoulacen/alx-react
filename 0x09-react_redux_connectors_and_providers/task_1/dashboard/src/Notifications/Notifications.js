@@ -36,6 +36,7 @@ class Notifications extends Component {
                 border: "none",
                 position: "absolute",
                 right: 20,
+                cursor: "pointer",
               }}
               aria-label="close"
               onClick={handleHideDrawer}
