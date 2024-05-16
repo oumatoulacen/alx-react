@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { StyleSheet, css } from "aphrodite";
+import { connect } from "react-redux";
 import Notifications from "../Notifications/Notifications";
 import Header from "../Header/Header";
 import BodySection from "../BodySection/BodySection";
@@ -6,10 +8,9 @@ import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBot
 import Login from "../Login/Login";
 import CourseList from "../CourseList/CourseList";
 import Footer from "../Footer/Footer";
-import PropTypes from "prop-types";
 import { getLatestNotification } from "../utils/utils";
-import { StyleSheet, css } from "aphrodite";
 import { AppProvider, user } from "./AppContext";
+// import PropTypes from "prop-types";
 
 const listCourses = [
   { id: 1, name: "ES6", credit: 60 },
@@ -58,7 +59,6 @@ class App extends Component {
       user: user,
     });
   };
-
   
   LogIn(email, password) {
     this.setState({
@@ -188,4 +188,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+
+export const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.get("isUserLoggedIn"),
+  };
+};
+
+// inject the state of the store as props to the App component
+export default connect(mapStateToProps)(App);
