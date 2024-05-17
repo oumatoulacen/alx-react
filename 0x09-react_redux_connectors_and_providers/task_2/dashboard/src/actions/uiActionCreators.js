@@ -1,5 +1,9 @@
-import { LOGIN, LOGOUT, DISPLAY_NOTIFICATION_DRAWER, HIDE_NOTIFICATION_DRAWER } from "./uiActionTypes";
-// import fetch from 'node-fetch';
+import { LOGIN, LOGOUT,
+  DISPLAY_NOTIFICATION_DRAWER,
+  HIDE_NOTIFICATION_DRAWER,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+} from './uiActionTypes';
 
 const login = (email, password) => {
   return {
@@ -79,7 +83,7 @@ const boundHideNotificationDrawer = () => {
 
 const loginRequest = (email, password) => {
   return (dispatch) => {
-      boundLogin(email, password);
+      dispatch(login(email, password));
 
       return fetch('http://localhost:8564/login-success.json')
           .then((res) => { res.json() })
@@ -88,6 +92,7 @@ const loginRequest = (email, password) => {
   }
 }
 
+// const loginRequest = loginSuccess
 
 export {
   login, logout, loginSuccess, loginFailure,
