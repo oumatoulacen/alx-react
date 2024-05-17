@@ -2,12 +2,12 @@ import { FETCH_NOTIFICATIONS_SUCCESS, MARK_AS_READ, SET_TYPE_FILTER } from '../a
 import { Map } from 'immutable';
 import { notificationsNormalizer } from '../schema/notifications';
 
-export const initialState = Map({
+export const initialNotificationState = Map({
     notifications: {},
     filter: 'DEFAULT'
 });
 
-const notificationReducer = (state = initialState, action) => {
+const notificationReducer = (state = initialNotificationState, action) => {
     switch (action.type) {
         case FETCH_NOTIFICATIONS_SUCCESS:
             // this function won't work as expected if the data was as notifications.json but with the data as in previous tasks

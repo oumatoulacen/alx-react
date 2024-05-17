@@ -81,10 +81,12 @@ describe('Test mapStateToProps ', () => {
   });
   
   it('verify that the function returns the right object', () => {
-    let state = fromJS({
-      isUserLoggedIn: true,
-      isNotificationDrawerVisible: false,
-    });
+    let state = {
+      ui: fromJS({
+        isNotificationDrawerVisible: false,
+        isUserLoggedIn: true,
+      }),
+    };
     expect(mapStateToProps(state)).toEqual({
       isLoggedIn: true,
       displayDrawer: false,

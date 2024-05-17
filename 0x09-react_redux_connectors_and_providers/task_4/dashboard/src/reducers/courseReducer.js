@@ -2,9 +2,9 @@ import { FETCH_COURSE_SUCCESS, SELECT_COURSE, UNSELECT_COURSE } from '../actions
 import { coursesNormalizer, course } from '../schema/courses';
 import { Map } from 'immutable';
 
-export const initialState = Map({});
+export const initialCourseState = Map({});
 
-const courseReducer = (state = initialState, action) => {
+const courseReducer = (state = initialCourseState, action) => {
     switch (action.type) {
         case FETCH_COURSE_SUCCESS:
             const normalizedCourses = coursesNormalizer(action.data);

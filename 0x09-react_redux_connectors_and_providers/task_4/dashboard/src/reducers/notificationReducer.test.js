@@ -1,4 +1,4 @@
-import notificationReducer, { initialState } from "./notificationReducer";
+import notificationReducer, { initialNotificationState } from "./notificationReducer";
 import { FETCH_NOTIFICATIONS_SUCCESS } from "../actions/notificationActionTypes";
 import { Map } from "immutable";
 import { notificationsNormalizer } from "../schema/notifications";
@@ -26,7 +26,7 @@ const normalizedData = notificationsNormalizer(data);
 describe("notificationReducer", () => {
     it("should return the initial state for the reducer", () => {
         const state = notificationReducer(undefined, {});
-        expect(state.toJS()).toEqual(initialState.toJS());
+        expect(state).toEqual(initialNotificationState);
     });
 
     it("should return the data from FETCH_NOTIFICATIONS_SUCCESS", () => {
