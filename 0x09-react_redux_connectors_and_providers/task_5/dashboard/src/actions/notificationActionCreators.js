@@ -37,10 +37,32 @@ const setLoadingState = (loading) => {
     };
 }
 
+const setNotifications = (data) => {
+    return {
+        type: FETCH_NOTIFICATIONS_SUCCESS,
+        data
+    };
+}
+
+const fetchNotifications = () => {
+    return (dispatch) => {
+        dispatch(setLoadingState(true));
+        return fetch('/notifications.json')
+            .then((response) => response.json())
+            .then((data) => {
+                dispatch(setNotifications(data));
+                dispatch(setLoadingState(false));
+            })
+            .catch((error) => console.log(error));
+    };
+}
+
 export {
     markAsRead,
     setNotificationFilter,
     boundMarkAsRead,
     boundSetNotificationFilter,
-    setLoadingState
+    setLoadingState,
+    setNotifications,
+    fetchNotifications
 };
