@@ -69,4 +69,5 @@ const mapStateToProps = (state) => {
   };
 };
 
+export { Header as StatelessHeader };
 export default connect(mapStateToProps, { logout })(Header);

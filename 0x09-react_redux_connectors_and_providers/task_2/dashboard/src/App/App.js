@@ -176,5 +176,5 @@ export const mapDispatchToProps = {
   logOut: logout,
 };
 
-// inject the state of the store as props to the App component
+export { App as StatelessApp };
 export default connect(mapStateToProps, mapDispatchToProps)(App);

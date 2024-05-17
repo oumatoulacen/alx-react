@@ -1,32 +1,36 @@
-import { mount, shallow } from "enzyme";
-import React from "react";
-import Footer from "./Footer";
-import { StyleSheetTestUtils } from "aphrodite";
-import AppContext from "../App/AppContext";
+import React from 'react';
+import { StatelessFooter } from './Footer';
+import { shallow } from 'enzyme';
+import { StyleSheetTestUtils } from 'aphrodite';
 
-describe("<Footer />", () => {
-  beforeEach(() => {
-    StyleSheetTestUtils.suppressStyleInjection();
-  });
-
-  afterEach(() => {
-    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-  })
-
-  it("Footer renders without crashing", () => {
-    const wrapper = shallow(<Footer />);
-    expect(wrapper.exists()).toEqual(true);
-  });
-
-  it("Verify that when the user is logedout the Contact us link is not displayed", () => {
-    const wrapper = shallow(<Footer />);
-    expect(wrapper.find("a").exists()).toEqual(false);
-  });
-
-  it("Verify that when the user is logedin the Contact us link is displayed", () => {
-    const context = { user: { isLoggedIn: true } };
-    const wrapper = mount(<AppContext.Provider value={context}><Footer /></AppContext.Provider>);
-    expect(wrapper.find("a").exists()).toEqual(true);
-    expect(wrapper.text()).toContain("Contact us");
-  });
+describe('<StatelessFooter />', () => {
+	let wrapper;
+	beforeEach(() => {
+		StyleSheetTestUtils.suppressStyleInjection();
+		const user = { email: 'alice@gmail.com', password: 'password' };
+		wrapper = shallow(<StatelessFooter user={user} />);
+	});
+	afterEach(() => {
+		StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+	});
+	
+	it('Footer renders without crashing', () => {
+		expect(wrapper.exists()).toBe(true);
+	});
+	
+	it('Footer at the very least render the text “Copyright”', () => {
+		const text = wrapper.text();
+		expect(text).toContain('Copyright');
+	});
+	it('verify that the link is not displayed when the user is logged out within the context', () => {
+		const user = null;
+		const footer = shallow(<StatelessFooter user={user} />);
+	
+		const link = footer.find('a');
+		expect(link.exists()).toBe(false);
+	});
+	it('verify that the link is displayed when the user is logged in within the context', () => {
+		const link = wrapper.find('a');
+		expect(link.exists()).toBe(true);
+	});
 });
