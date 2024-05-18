@@ -1,18 +1,19 @@
 import React, { Component } from "react";
 import NotificationItem from "./NotificationItem";
 import PropTypes from "prop-types";
-import NotificationItemShape from "./NotificationItemShape";
 import closeIcon from "../assets/close-icon.png";
 import { StyleSheet, css } from "aphrodite";
+import { connect } from "react-redux";
+import { fetchNotifications } from "../actions/notificationActionCreators";
 
 class Notifications extends Component {
+  componentDidMount() {
+		this.props.fetchNotifications();
+	}
+
   render() {
     const {
-      displayDrawer,
-      listNotifications,
-      handleDisplayDrawer,
-      handleHideDrawer,
-      markNotificationAsRead
+      displayDrawer, listNotifications, handleDisplayDrawer, handleHideDrawer,
     } = this.props;
 
     const menuPStyle = css(
@@ -21,11 +22,7 @@ class Notifications extends Component {
 
     return (
       <>
-        <div
-          className={css(styles.menuItem)}
-          id="menuItem"
-          onClick={handleDisplayDrawer}
-        >
+        <div className={css(styles.menuItem)} id="menuItem" onClick={handleDisplayDrawer} >
           <p className={menuPStyle}>Your notifications</p>
         </div>
         {displayDrawer && (
@@ -49,9 +46,7 @@ class Notifications extends Component {
               />
             </button>
             { listNotifications.length !== 0 && (
-              <p className={css(styles.notificationsP)}>
-              Here is the list of notifications
-            </p>)
+              <p className={css(styles.notificationsP)}>Here is the list of notifications </p>)
             }
             <ul className={css(styles.notificationsUL)}>
               {listNotifications.length === 0 && (
@@ -60,12 +55,10 @@ class Notifications extends Component {
 
               {listNotifications.map((notification) => (
                 <NotificationItem
-                  key={notification.id}
-                  id={notification.id}
+                  key={notification.guid}
+                  id={toString(notification.guid)}
                   type={notification.type}
                   value={notification.value}
-                  html={notification.html}
-                  markAsRead={markNotificationAsRead}
                 />
               ))}
             </ul>
@@ -77,20 +70,39 @@ class Notifications extends Component {
 }
 
 Notifications.defaultProps = {
-  displayDrawer: false,
-  listNotifications: [],
-  handleDisplayDrawer: () => {},
-  handleHideDrawer: () => {},
-  markNotificationAsRead: () => {},
+	displayDrawer: false,
+	listNotifications: [],
+	handleDisplayDrawer: () => { },
+	handleHideDrawer: () => { },
+	fetchNotifications: () => { },
+};
+Notifications.propTypes = {
+	displayDrawer: PropTypes.bool,
+	listNotifications: PropTypes.array,
+	handleDisplayDrawer: PropTypes.func,
+	handleHideDrawer: PropTypes.func,
+	fetchNotifications: PropTypes.func,
 };
 
-Notifications.propTypes = {
-  displayDrawer: PropTypes.bool,
-  listNotifications: PropTypes.arrayOf(NotificationItemShape),
-  handleDisplayDrawer: PropTypes.func,
-  handleHideDrawer: PropTypes.func,
-  markNotificationAsRead: PropTypes.func,
+export const mapStateToProps = (state) => ({
+  listNotifications: Object.values(state.notifications.get('notifications').toJS())
+});
+
+export const mapDispatchToProps = {
+	fetchNotifications,
 };
+
+export { Notifications as StatelessNotifications };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Notifications);
+
+
+
+
+
+
+
+
 
 const cssVars = {
   mainColor: "#e01d3f",
@@ -204,5 +216,3 @@ const styles = StyleSheet.create({
     },
   },
 });
-
-export default Notifications;

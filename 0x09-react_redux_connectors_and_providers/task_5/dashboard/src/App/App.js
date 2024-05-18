@@ -74,26 +74,9 @@ document.body.style.margin = 0;
 
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
-
-    this.state = {
-      listNotifications: listNotifications,
-    };
-  }
-
-  markNotificationAsRead(id) {
-    this.setState({
-      listNotifications: this.state.listNotifications.filter(
-        (notification) => notification.id !== id
-      ),
-    });
-  }
-
   render() {
-
-    const { isLoggedIn,
+    const {
+      isLoggedIn,
       displayDrawer, displayNotificationDrawer,
       hideNotificationDrawer, logIn 
     } = this.props;
@@ -101,11 +84,9 @@ class App extends Component {
     return (
       <>
           <Notifications
-            listNotifications={this.state.listNotifications}
             displayDrawer={displayDrawer}
             handleDisplayDrawer={ displayNotificationDrawer }
             handleHideDrawer={ hideNotificationDrawer }
-            markNotificationAsRead={this.markNotificationAsRead}
           />
           <div className={css(styles.container)}>
             <div className={css(styles.app)}>

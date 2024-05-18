@@ -1,7 +1,9 @@
+import { notificationsNormalizer } from "../schema/notifications";
 import {
     MARK_AS_READ, SET_TYPE_FILTER,
     NotificationTypeFilters,
-    SET_LOADING_STATE
+    SET_LOADING_STATE,
+    FETCH_NOTIFICATIONS_SUCCESS
 } from "./notificationActionTypes";
 
 const markAsRead = (index) => {
@@ -44,16 +46,20 @@ const setNotifications = (data) => {
     };
 }
 
+import notificationReducer from "../reducers/notificationReducer";
 const fetchNotifications = () => {
     return (dispatch) => {
         dispatch(setLoadingState(true));
-        return fetch('/notifications.json')
+        return fetch('http://localhost:8564/notifications.json')
             .then((response) => response.json())
             .then((data) => {
+                console.log('data from fetchNotif: ', Object.values(notificationsNormalizer(data))[0]);
                 dispatch(setNotifications(data));
-                dispatch(setLoadingState(false));
+                // const state = notificationReducer(undefined, setNotifications(data));
+                // console.log('state from fetchNotif: ', Object.values(state.get('notifications').toJS()));
             })
-            .catch((error) => console.log(error));
+            .catch((error) => console.log(error.message))
+            .finally(() => dispatch(setLoadingState(false)));
     };
 }
 

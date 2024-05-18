@@ -1,29 +1,32 @@
-import { FETCH_NOTIFICATIONS_SUCCESS, MARK_AS_READ, SET_TYPE_FILTER } from '../actions/notificationActionTypes';
-import { Map } from 'immutable';
-import { notificationsNormalizer } from '../schema/notifications';
-
-export const initialNotificationState = Map({
+import {
+    MARK_AS_READ,
+    SET_TYPE_FILTER,
+    NotificationTypeFilters,
+    FETCH_NOTIFICATIONS_SUCCESS,
+    SET_LOADING_STATE,
+  } from '../actions/notificationActionTypes';
+  import { fromJS } from 'immutable';
+  import { notificationsNormalizer } from '../schema/notifications';
+  
+  export const initital_state = fromJS({
     notifications: {},
-    filter: 'DEFAULT'
-});
-
-const notificationReducer = (state = initialNotificationState, action) => {
-    switch (action.type) {
-        case FETCH_NOTIFICATIONS_SUCCESS:
-            // this function won't work as expected if the data was as notifications.json but with the data as in previous tasks
-            const normalizedNotifications = notificationsNormalizer(action.data);
-            // normalizedNotifications is an object with the following structure: { notifications: { 1: { ... }, 2: { ... }, ... } }
-            Object.keys(normalizedNotifications.notifications).forEach((key) => {
-                normalizedNotifications.notifications[key].isRead = false;
-            });
-            return state.merge(normalizedNotifications);
-        case MARK_AS_READ:
-            return state.setIn(['notifications', String(action.index), 'isRead'], true);
-        case SET_TYPE_FILTER:
-            return state.set('filter', action.filter);
-        default:
-            return state;
+    filter: NotificationTypeFilters.DEFAULT,
+    loading: false,
+  });
+  
+  const notificationReducer = (state = initital_state, action) => {
+    switch (action?.type) {
+      case FETCH_NOTIFICATIONS_SUCCESS:
+        return state.mergeDeep({ notifications: notificationsNormalizer(action.data) });
+      case MARK_AS_READ:
+        return state.setIn(['notifications', action.index, 'isRead'], true);
+      case SET_TYPE_FILTER:
+        return state.set('filter', action.filter);
+      case SET_LOADING_STATE:
+        return state.set('loading', action.loading);
+      default:
+        return state;
     }
-}
-
-export default notificationReducer;
+  };
+  
+  export default notificationReducer;

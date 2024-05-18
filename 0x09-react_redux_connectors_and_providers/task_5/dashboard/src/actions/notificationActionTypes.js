@@ -9,4 +9,10 @@ const NotificationTypeFilters = {
     URGENT: 'URGENT'
 };
 
-export { MARK_AS_READ, SET_TYPE_FILTER, NotificationTypeFilters, FETCH_NOTIFICATIONS_SUCCESS };
+export {
+    MARK_AS_READ,
+    SET_TYPE_FILTER,
+    NotificationTypeFilters,
+    FETCH_NOTIFICATIONS_SUCCESS,
+    SET_LOADING_STATE
+};

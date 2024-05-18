@@ -5,7 +5,6 @@ import { StyleSheet, css } from "aphrodite";
 const NotificationItem = React.memo(function NotificationItem({
   type,
   value,
-  html,
   markAsRead,
   id,
 }) {
@@ -28,7 +27,6 @@ const NotificationItem = React.memo(function NotificationItem({
       <li
         className={typeStyle}
         data-notification-type={type}
-        dangerouslySetInnerHTML={html}
         onClick={() => markAsRead(id)}
       ></li>
     );
@@ -40,7 +38,6 @@ const NotificationItem = React.memo(function NotificationItem({
 NotificationItem.defaultProps = {
   type: "default",
   value: "",
-  html: {},
   markAsRead: () => {},
   id: NaN,
 };
@@ -48,11 +45,8 @@ NotificationItem.defaultProps = {
 NotificationItem.propTypes = {
   type: PropTypes.string,
   value: PropTypes.string,
-  html: PropTypes.shape({
-    __html: PropTypes.string,
-  }),
   markAsRead: PropTypes.func,
-  id: PropTypes.number,
+  id: PropTypes.string || PropTypes.number,
 };
 
 const screenSize = {
