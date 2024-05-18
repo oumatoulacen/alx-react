@@ -5,6 +5,8 @@ import closeIcon from "../assets/close-icon.png";
 import { StyleSheet, css } from "aphrodite";
 import { connect } from "react-redux";
 import { fetchNotifications } from "../actions/notificationActionCreators";
+import { getUnreadNotifications } from "../selectors/notificationSelector";
+import { markAsAread } from "../actions/notificationActionCreators";
 
 class Notifications extends Component {
   componentDidMount() {
@@ -56,7 +58,7 @@ class Notifications extends Component {
               {listNotifications.map((notification) => (
                 <NotificationItem
                   key={notification.guid}
-                  id={toString(notification.guid)}
+                  id={notification.guid}
                   type={notification.type}
                   value={notification.value}
                 />
@@ -85,11 +87,12 @@ Notifications.propTypes = {
 };
 
 export const mapStateToProps = (state) => ({
-  listNotifications: Object.values(state.notifications.get('notifications').toJS())
+  listNotifications: getUnreadNotifications(state),
 });
 
-export const mapDispatchToProps = {
-	fetchNotifications,
+const mapDispatchToProps = {
+  fetchNotifications,
+  markNotificationAsRead: markAsAread,
 };
 
 export { Notifications as StatelessNotifications };
@@ -99,11 +102,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Notifications);
 
 
 
-
-
-
-
-
+// styles
 const cssVars = {
   mainColor: "#e01d3f",
 };

@@ -1,6 +1,6 @@
 import { shallow } from "enzyme";
 import React from "react";
-import NotificationItem from "./NotificationItem";
+import { StatelessNotificationItem } from "./NotificationItem";
 import { StyleSheetTestUtils } from "aphrodite";
 
 describe("<Notifications />", () => {
@@ -12,7 +12,7 @@ describe("<Notifications />", () => {
   });
 
   it("NotificationItem renders without crashing", () => {
-    const wrapper = shallow(<NotificationItem />);
+    const wrapper = shallow(<StatelessNotificationItem />);
     expect(wrapper.exists()).toEqual(true);
   });
 });

@@ -53,7 +53,7 @@ const fetchNotifications = () => {
         return fetch('http://localhost:8564/notifications.json')
             .then((response) => response.json())
             .then((data) => {
-                console.log('data from fetchNotif: ', Object.values(notificationsNormalizer(data))[0]);
+                // console.log('data from fetchNotif: ', Object.values(notificationsNormalizer(data))[0]);
                 dispatch(setNotifications(data));
                 // const state = notificationReducer(undefined, setNotifications(data));
                 // console.log('state from fetchNotif: ', Object.values(state.get('notifications').toJS()));
