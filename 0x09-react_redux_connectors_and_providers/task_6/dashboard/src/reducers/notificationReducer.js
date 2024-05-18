@@ -8,13 +8,13 @@ import {
   import { fromJS } from 'immutable';
   import { notificationsNormalizer } from '../schema/notifications';
   
-  export const initital_state = fromJS({
+  export const initialNotificationState = fromJS({
     notifications: {},
     filter: NotificationTypeFilters.DEFAULT,
     loading: false,
   });
   
-  const notificationReducer = (state = initital_state, action) => {
+  const notificationReducer = (state = initialNotificationState, action) => {
     switch (action?.type) {
       case FETCH_NOTIFICATIONS_SUCCESS:
         return state.mergeDeep({ notifications: notificationsNormalizer(action.data) });
