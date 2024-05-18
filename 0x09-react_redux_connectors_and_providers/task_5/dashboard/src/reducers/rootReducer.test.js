@@ -10,9 +10,9 @@ describe("rootReducer tests", function () {
 
     it("verifies the state returned by the rootReducer function equals the initial state when no action is passed", function () {
         const expectedState = {
-        courses: Map({}),
-        notifications: Map({}),
-        ui: Map({}),
+            courses: Map({}),
+            notifications: Map({}),
+            ui: Map({}),
         };
 
         const state = rootReducer(expectedState, {});
