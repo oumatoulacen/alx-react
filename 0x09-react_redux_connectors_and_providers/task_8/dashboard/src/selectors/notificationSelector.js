@@ -1,16 +1,26 @@
-export const filterTypeSelected = state => state.get('filter');
+import { createSelector } from 'reselect';
 
+// for notifications reducer
+export const filterTypeSelected = state => state.get('filter');
 export const getNotifications = state => state.get('notifications');
 
-export const getUnreadNotifications = (state) => {
-  const notifications = state.notifications.get("notifications").valueSeq().toArray();
-  if (notifications) {
-    // console.log('notifications unfiltered: ', notifications);
-    const filtered = notifications
-      .filter((value) => value.isRead === false);
-    // console.log('filtered: ', filtered);
-    return filtered;
-  }
+// for root reducer
+export const getNotificationsSelector = (state) => state.notifications;
+export const filterTypeSelector = state => state.notifications.get('filter');
 
-  return [];
-};
+// memoized selector
+export const getUnreadNotificationsByType = createSelector(
+  getNotificationsSelector,
+  filterTypeSelector,
+  (notifications, filter) => {
+    const notificationsArray = notifications.get('notifications').valueSeq().toArray();
+
+    return notificationsArray.filter((notification) => {
+      if (filter === 'DEFAULT') {
+        return notification.isRead === false;
+      } else if (filter === 'URGENT') {
+        return notification.isRead === false && notification.type === 'urgent';
+      }
+    });
+  }
+);

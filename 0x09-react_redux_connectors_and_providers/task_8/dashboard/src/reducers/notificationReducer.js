@@ -10,7 +10,7 @@ import {
   
   export const initialNotificationState = fromJS({
     notifications: {},
-    filter: NotificationTypeFilters.DEFAULT,
+    filter: NotificationTypeFilters.URGENT,
     loading: false,
   });
   
