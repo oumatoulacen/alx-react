@@ -13,9 +13,28 @@
       },
       "context": {
         "guid": "2d8e40be-1c78-4de0-afc9-fcc147afd4d2",
-        "isRead": true,
+        "isRead": false,
         "type": "urgent",
-        "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt."
+        "html": "<h3>Urgent: Important message from Poole Sanders</h3><mark>Ut labore et dolore magna aliqua.</mark>"
+      }
+    },
+    {
+      "id": "5debd7648edafc8af244228",
+      "author": {
+        "id": "5debd764a757c7839d722e9",
+        "name": {
+          "first": "Poole",
+          "last": "Sanders"
+        },
+        "email": "poole.sanders@holberton.nz",
+        "picture": "http://placehold.it/32x32",
+        "age": 25
+      },
+      "context": {
+        "guid": "2d8e40be-1c78-4de0-afc9-fcc147afd4d2",
+        "isRead": false,
+        "type": "urgent",
+        "value": "<h3>Urgent: Important message from Poole Sanders</h3><mark>Ut labore et dolore magna aliqua.</mark>"
       }
     },
     {

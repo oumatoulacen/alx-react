@@ -4,9 +4,8 @@ import PropTypes from "prop-types";
 import closeIcon from "../assets/close-icon.png";
 import { StyleSheet, css } from "aphrodite";
 import { connect } from "react-redux";
-import { fetchNotifications } from "../actions/notificationActionCreators";
 import { getUnreadNotificationsByType } from "../selectors/notificationSelector";
-import { markAsAread } from "../actions/notificationActionCreators";
+import { fetchNotifications, setNotificationFilter } from "../actions/notificationActionCreators";
 
 class Notifications extends Component {
   componentDidMount() {
@@ -15,7 +14,8 @@ class Notifications extends Component {
 
   render() {
     const {
-      displayDrawer, listNotifications, handleDisplayDrawer, handleHideDrawer,
+      displayDrawer, listNotifications, handleDisplayDrawer,
+      handleHideDrawer, setNotificationFilter
     } = this.props;
 
     const menuPStyle = css(
@@ -30,25 +30,23 @@ class Notifications extends Component {
         {displayDrawer && (
           <div className={css(styles.notifications)} id="Notifications">
             <button
-              style={{
-                background: "transparent",
-                border: "none",
-                position: "absolute",
-                right: 20,
-                cursor: "pointer",
-              }}
-              aria-label="close"
-              onClick={handleHideDrawer}
-              id="closeNotifications"
+              style={{ background: "transparent", border: "none", position: "absolute", right: 20, cursor: "pointer" }}
+              aria-label="close" onClick={handleHideDrawer} id="closeNotifications"
             >
-              <img
-                src={closeIcon}
-                alt="close-icon"
-                className={css(styles.notificationsButtonImage)}
-              />
+              <img src={closeIcon} alt="close-icon" className={css(styles.notificationsButtonImage)} />
             </button>
             { listNotifications.length !== 0 && (
-              <p className={css(styles.notificationsP)}>Here is the list of notifications </p>)
+              <>
+                <p className={css(styles.notificationsP)}>Here is the list of notifications </p>
+                <button type="button" className={css(styles.filterButton)} id="buttonFilterUrgent" onClick={() =>  setNotificationFilter("URGENT") }
+                >
+                  ❗❗
+                </button>
+                <button type="button" className={css(styles.filterButton)} id="buttonFilterDefault" onClick={() => setNotificationFilter("DEFAULT") }
+                >
+                  💠
+                </button>
+              </>)
             }
             <ul className={css(styles.notificationsUL)}>
               {listNotifications.length === 0 && (
@@ -61,6 +59,7 @@ class Notifications extends Component {
                   id={notification.guid}
                   type={notification.type}
                   value={notification.value}
+                  html={notification.html}
                 />
               ))}
             </ul>
@@ -77,6 +76,7 @@ Notifications.defaultProps = {
 	handleDisplayDrawer: () => { },
 	handleHideDrawer: () => { },
 	fetchNotifications: () => { },
+  setNotificationFilter: () => { },
 };
 Notifications.propTypes = {
 	displayDrawer: PropTypes.bool,
@@ -84,6 +84,7 @@ Notifications.propTypes = {
 	handleDisplayDrawer: PropTypes.func,
 	handleHideDrawer: PropTypes.func,
 	fetchNotifications: PropTypes.func,
+  setNotificationFilter: PropTypes.func,
 };
 
 export const mapStateToProps = (state) => ({
@@ -92,7 +93,7 @@ export const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   fetchNotifications,
-  markNotificationAsRead: markAsAread,
+  setNotificationFilter,
 };
 
 export { Notifications as StatelessNotifications };

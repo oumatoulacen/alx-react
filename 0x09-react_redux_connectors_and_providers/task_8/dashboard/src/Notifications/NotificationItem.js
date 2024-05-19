@@ -5,25 +5,26 @@ import { markAsRead } from "../actions/notificationActionCreators";
 import { connect } from "react-redux";
 
 const NotificationItem = React.memo(
-  function NotificationItem({ type, value, markAsRead, id }) {
+  function NotificationItem({ type, html, value, markAsRead, id }) {
   let listItem;
 
   let typeStyle = css(type === "urgent" ? styles.urgent : styles.default);
 
-  if (value) {
+  if (!html && value) {
     listItem = (
       <li className={typeStyle} data-notification-type={type} onClick={() => markAsRead(id)} >
         {value}
       </li>
     );
   } else {
-    listItem = <li className={typeStyle} data-notification-type={type} onClick={() => markAsRead(id)} ></li>
+    listItem = <li className={typeStyle} dangerouslySetInnerHTML={html} data-notification-type={type} onClick={() => markAsRead(id)} ></li>
   }
   return listItem;
 });
 
 NotificationItem.defaultProps = {
   type: "default",
+  html: null,
   value: "",
   markAsRead: () => {},
   id: NaN,
@@ -31,6 +32,7 @@ NotificationItem.defaultProps = {
 
 NotificationItem.propTypes = {
   type: PropTypes.string,
+  html: PropTypes.shape({ __html: PropTypes.string }),
   value: PropTypes.string,
   markAsRead: PropTypes.func,
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
