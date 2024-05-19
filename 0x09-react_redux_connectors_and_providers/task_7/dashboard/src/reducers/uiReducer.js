@@ -10,7 +10,7 @@ import {
 
 export const initialUiState = Map({
   isNotificationDrawerVisible: false,
-  isUserLoggedIn: false,
+  isUserLoggedIn: true,
   user: {},
 });
 

@@ -5,5 +5,5 @@ export const getListCourses = (state) => {
       return courses.valueSeq().toArray();
     }
   
-    return courses;
+    return [];
 };

@@ -2,7 +2,11 @@ import { FETCH_COURSE_SUCCESS, SELECT_COURSE, UNSELECT_COURSE } from '../actions
 import { coursesNormalizer, course } from '../schema/courses';
 import { Map } from 'immutable';
 
-export const initialCourseState = Map({});
+// you can empty this if tests fails
+export const initialCourseState = Map({
+    1: { id: 1, name: 'ES6', credit: 60 },
+    2: { id: 2, name: 'Webpack', credit: 20 },
+});
 
 const courseReducer = (state = initialCourseState, action) => {
     switch (action.type) {
